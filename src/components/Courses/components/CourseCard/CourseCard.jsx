@@ -1,8 +1,16 @@
 import Button from '../../../../common/Button/Button';
 import SearchBar from '../SearchBar/SearchBar';
+import { mockedAuthorsList as authorsList } from '../../../../constants';
 
 export default function CourseCard({ course }) {
 	const { title, description, authors, duration, created } = course;
+	const findAuthorName = (id) => {
+		return authorsList.filter((author) => {
+			console.log('call from abyss', author.id === id ? author.name : '');
+			return author.id === id ? author.name : '';
+		});
+	};
+
 	return (
 		<>
 			<SearchBar></SearchBar>
@@ -12,10 +20,9 @@ export default function CourseCard({ course }) {
 					<p>{description}</p>
 				</div>
 				<div>
-					<p>
-						<b>Authors:</b>
-						{authors}
-					</p>
+					<b>Authors:</b>
+					
+					{/* <p>{authors.map((author) => findAuthorName(author))}</p> */}
 					<p>
 						<b>Duration:</b>
 						{duration}
@@ -24,7 +31,7 @@ export default function CourseCard({ course }) {
 						<b>Created:</b>
 						{created}
 					</p>
-					<Button></Button>
+					<Button buttonText='Show course'></Button>
 				</div>
 			</div>
 		</>
