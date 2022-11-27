@@ -1,39 +1,44 @@
 import Button from '../../../../common/Button/Button';
 import SearchBar from '../SearchBar/SearchBar';
-import { mockedAuthorsList as authorsList } from '../../../../constants';
+import { listAuthorsString } from '../../../../helpers/pipeAuthor';
+import { pipeDuration } from '../../../../helpers/pipeDuration';
+import { dateGenerator } from '../../../../helpers/dateGeneratop';
+import React, { useContext } from 'react';
+import { Context } from '../../../../Context';
+import s from './CourseCard.css';
 
-export default function CourseCard({ course }) {
-	const { title, description, authors, duration, created } = course;
-	const findAuthorName = (id) => {
-		return authorsList.filter((author) => {
-			console.log('call from abyss', author.id === id ? author.name : '');
-			return author.id === id ? author.name : '';
-		});
+export default function CourseCard({ course, authorsId }) {
+	const [context, setContext] = useContext(Context);
+	const { title, description, authors, duration, creationDate } = course;
+
+	const findAuthorById = (id) => {
+		const author = context.find((author) => author.id === id);
+		return author.name;
+	};
+
+	const listAuthorsString = (ids) => {
+		return ids.map((id) => findAuthorById(id)).join(', ');
 	};
 
 	return (
-		<>
-			<SearchBar></SearchBar>
+		<div className='container'>
 			<div>
-				<div>
-					<h3>{title}</h3>
-					<p>{description}</p>
-				</div>
-				<div>
-					<b>Authors:</b>
-					
-					{/* <p>{authors.map((author) => findAuthorName(author))}</p> */}
-					<p>
-						<b>Duration:</b>
-						{duration}
-					</p>
-					<p>
-						<b>Created:</b>
-						{created}
-					</p>
-					<Button buttonText='Show course'></Button>
-				</div>
+				<h3>{title}</h3>
+				<p>{description}</p>
 			</div>
-		</>
+			<div>
+				<b>Authors:</b>
+				<p>{listAuthorsString(authors)}</p>
+				<p>
+					<b>Duration: </b>
+					{`${pipeDuration(duration)} hours`}
+				</p>
+				<p>
+					<b>Created: </b>
+					{dateGenerator(creationDate)}
+				</p>
+				<Button buttonText='Show course'></Button>
+			</div>
+		</div>
 	);
 }

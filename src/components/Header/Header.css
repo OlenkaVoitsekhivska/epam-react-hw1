@@ -1,0 +1,12 @@
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav__block{
+    display: flex;
+    align-items: center;
+}
+.nav__block p{
+    margin-right:50px;
+}

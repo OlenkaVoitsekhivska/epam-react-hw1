@@ -1,3 +1,3 @@
 export default function Button({ buttonText, onClick }) {
-	return <button>{buttonText}</button>;
+	return <button onClick={onClick}>{buttonText}</button>;
 }
