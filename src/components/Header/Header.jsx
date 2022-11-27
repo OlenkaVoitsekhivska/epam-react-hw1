@@ -1,6 +1,6 @@
 import Logo from './components/Logo/Logo';
 import Button from '../../common/Button/Button';
-import s from './Header.css';
+import './Header.css';
 
 // const IMG_URL = ''
 

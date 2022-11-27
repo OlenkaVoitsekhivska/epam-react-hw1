@@ -1,15 +1,10 @@
 import Input from '../../common/Input/Input';
 import Button from '../../common/Button/Button';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../../Context';
 
 import { pipeDuration } from '../../helpers/pipeDuration';
-import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import {
-	mockedAuthorsList as authorsId,
-	mockedAuthorsList,
-} from '../../constants';
 import { mockedCoursesList as courses } from '../../constants';
 
 export default function CreateCourse({ toggleShowComponent }) {
@@ -21,7 +16,7 @@ export default function CreateCourse({ toggleShowComponent }) {
 	};
 	const [context, setContext] = useContext(Context);
 
-	const [availableAuthors, setAvailableAuthors] = useState(context);
+	const [availableAuthors, setAvailableAuthors] = useState(context.authors);
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
@@ -48,6 +43,7 @@ export default function CreateCourse({ toggleShowComponent }) {
 	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		const newCourse = {
 			id: uuidv4(),
 			title,
@@ -70,7 +66,10 @@ export default function CreateCourse({ toggleShowComponent }) {
 			alert('Author with this name already exists');
 			return;
 		}
-		setContext((prevState) => [...prevState, newAuthor]);
+		setContext((prevState) => ({
+			...prevState,
+			authors: [...prevState.authors, newAuthor],
+		}));
 		setAvailableAuthors((prevState) => [...prevState, newAuthor]);
 	};
 
@@ -82,6 +81,8 @@ export default function CreateCourse({ toggleShowComponent }) {
 					placeholderText='Enter title...'
 					onChange={(e) => setTitle(e)}
 					value={title}
+					type='text'
+					required
 				></Input>
 				<Button
 					buttonText='Create course'
@@ -106,6 +107,7 @@ export default function CreateCourse({ toggleShowComponent }) {
 						required
 						minLength={2}
 						value={addAuthor}
+						type='text'
 						onChange={(e) => setAddAuthor(e)}
 					></Input>
 					{/* HERE WE ARE CREATING NEW AUTHOR */}
@@ -139,6 +141,8 @@ export default function CreateCourse({ toggleShowComponent }) {
 					placeholderText='Enter duration in minutes'
 					onChange={(e) => setDuration(e)}
 					value={duration}
+					type='number'
+					required
 				></Input>
 				<p>Duration:{pipeDuration(duration)} hours</p>
 			</div>

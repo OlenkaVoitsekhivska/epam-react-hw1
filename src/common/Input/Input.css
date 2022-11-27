@@ -1,0 +1,6 @@
+.input__container>input{
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: rgb(245, 229, 2);
+    height: 35px;
+}

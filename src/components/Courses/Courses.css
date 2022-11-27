@@ -1,0 +1,6 @@
+.searchCourse__wrapper{
+    display: flex;
+}
+button:last-child{
+    margin-left: auto;
+}

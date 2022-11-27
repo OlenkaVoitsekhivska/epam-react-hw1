@@ -2,6 +2,7 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    outline: 1px solid red;
 }
 .nav__block{
     display: flex;

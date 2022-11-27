@@ -1,12 +1,17 @@
 import Input from '../../../../common/Input/Input';
 import Button from '../../../../common/Button/Button';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from '../../../../Context';
 
 export default function SearchBar({ searchItems }) {
 	const [searchQuery, setSearchQuery] = useState('');
+	const [context, setContext] = useContext(Context);
+
 	const registerInput = (searchWord) => {
 		setSearchQuery(searchWord);
-		console.log(searchQuery);
+		if (!searchWord) {
+			setContext((prevState) => ({ ...prevState, filter: '' }));
+		}
 	};
 	return (
 		<>

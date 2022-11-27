@@ -5,14 +5,14 @@ import { pipeDuration } from '../../../../helpers/pipeDuration';
 import { dateGenerator } from '../../../../helpers/dateGeneratop';
 import React, { useContext } from 'react';
 import { Context } from '../../../../Context';
-import s from './CourseCard.css';
+import './CourseCard.css';
 
-export default function CourseCard({ course, authorsId }) {
+export default function CourseCard({ course }) {
 	const [context, setContext] = useContext(Context);
 	const { title, description, authors, duration, creationDate } = course;
 
 	const findAuthorById = (id) => {
-		const author = context.find((author) => author.id === id);
+		const author = context.authors.find((author) => author.id === id);
 		return author.name;
 	};
 
@@ -21,14 +21,16 @@ export default function CourseCard({ course, authorsId }) {
 	};
 
 	return (
-		<div className='container'>
-			<div>
+		<div className='card__container'>
+			<div className='card__left'>
 				<h3>{title}</h3>
 				<p>{description}</p>
 			</div>
-			<div>
-				<b>Authors:</b>
-				<p>{listAuthorsString(authors)}</p>
+			<div className='card__right'>
+				<p className='card__authors'>
+					<b>Authors: </b>
+					{listAuthorsString(authors)}
+				</p>
 				<p>
 					<b>Duration: </b>
 					{`${pipeDuration(duration)} hours`}
