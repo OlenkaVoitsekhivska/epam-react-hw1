@@ -1,4 +1,5 @@
 Button{
+    display: block;
     border-style:solid;
     border-color: rgb(132, 28, 146);
     width: 150px;

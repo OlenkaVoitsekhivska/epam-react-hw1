@@ -6,6 +6,7 @@ import { Context } from '../../Context';
 import { pipeDuration } from '../../helpers/pipeDuration';
 import { v4 as uuidv4 } from 'uuid';
 import { mockedCoursesList as courses } from '../../constants';
+import './CreateCourse.css';
 
 export default function CreateCourse({ toggleShowComponent }) {
 	const handleDelete = (deletedAuthor) => {
@@ -43,7 +44,10 @@ export default function CreateCourse({ toggleShowComponent }) {
 	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
+		if (!title || !description || !duration || !selectedAuthors.length) {
+			alert('Please fill in all the fields!');
+			return;
+		}
 		const newCourse = {
 			id: uuidv4(),
 			title,
@@ -84,76 +88,78 @@ export default function CreateCourse({ toggleShowComponent }) {
 					type='text'
 					required
 				></Input>
-				<Button
-					buttonText='Create course'
-					type='submit'
-					// onClick={toggleShowComponent}
-				></Button>
+
+				<Button buttonText='Create course' type='submit'></Button>
 			</div>
 			<label htmlFor='courseDescription'>Description</label>
 			<textarea
 				name=''
+				placeholder='Enter description...'
 				id='courseDescription'
 				cols='30'
 				rows='10'
 				onChange={(e) => setDescription(e.target.value)}
 				minLength={2}
-				required
 			></textarea>
-			<div className='create__author'>
-				<h2>Add author</h2>
-				<div>
-					<Input
-						required
-						minLength={2}
-						value={addAuthor}
-						type='text'
-						onChange={(e) => setAddAuthor(e)}
-					></Input>
-					{/* HERE WE ARE CREATING NEW AUTHOR */}
-					<Button
-						buttonText='Create author'
-						type='button'
-						onClick={(e) => handleAddAuthor(e, addAuthor)}
-					></Button>
+			<div className='grid-wrap'>
+				<div className='create__author'>
+					<h2>Add author</h2>
+					<div>
+						<Input
+							required
+							minLength={2}
+							value={addAuthor}
+							labelText='Author name'
+							type='text'
+							placeholderText='Enter author name...'
+							onChange={(e) => setAddAuthor(e)}
+						></Input>
+						{/* HERE WE ARE CREATING NEW AUTHOR */}
+						<Button
+							buttonText='Create author'
+							type='button'
+							onClick={(e) => handleAddAuthor(e, addAuthor)}
+						></Button>
+					</div>
 				</div>
-			</div>
 
-			<div className='create__authorsList'>
-				<h2>Authors</h2>
-				<ul>
-					{availableAuthors.map(({ id, name }) => (
-						<li key={id}>
-							{name}
-							{/* HERE WE ARE ADDING AUTHORS TO COURSE LIST */}
-							<Button
-								buttonText='Add author'
-								type='button'
-								onClick={() => addAuthors({ id, name })}
-							></Button>
-						</li>
-					))}
-				</ul>
-			</div>
-			<div className='create__duration'>
-				<Input
-					labelText='Duration'
-					placeholderText='Enter duration in minutes'
-					onChange={(e) => setDuration(e)}
-					value={duration}
-					type='number'
-					required
-				></Input>
-				<p>Duration:{pipeDuration(duration)} hours</p>
-			</div>
-			<div className='create__courseAuthors'>
-				<h2>Course authors</h2>
+				<div className='create__authorsList'>
+					<h2>Authors</h2>
+					<ul>
+						{availableAuthors.map(({ id, name }) => (
+							<li key={id}>
+								{name}
+								{/* HERE WE ARE ADDING AUTHORS TO COURSE LIST */}
+								<Button
+									buttonText='Add author'
+									type='button'
+									onClick={() => addAuthors({ id, name })}
+								></Button>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className='create__duration'>
+					<h2>Duration</h2>
+					<Input
+						labelText='Duration'
+						placeholderText='Enter duration in minutes'
+						onChange={(e) => setDuration(e)}
+						value={duration}
+						type='number'
+						required
+					></Input>
+					<p>Duration:{pipeDuration(duration)} hours</p>
+				</div>
+				<div className='create__courseAuthors'>
+					<h2>Course authors</h2>
 
-				{selectedAuthors.length ? (
-					showSelectedAuthors()
-				) : (
-					<p>Author list is empty</p>
-				)}
+					{selectedAuthors.length ? (
+						showSelectedAuthors()
+					) : (
+						<p>Author list is empty</p>
+					)}
+				</div>
 			</div>
 		</form>
 	);

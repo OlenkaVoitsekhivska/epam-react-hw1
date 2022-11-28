@@ -2,6 +2,7 @@ import Input from '../../../../common/Input/Input';
 import Button from '../../../../common/Button/Button';
 import React, { useState, useContext } from 'react';
 import { Context } from '../../../../Context';
+import './SearchBar.css';
 
 export default function SearchBar({ searchItems }) {
 	const [searchQuery, setSearchQuery] = useState('');
@@ -15,7 +16,10 @@ export default function SearchBar({ searchItems }) {
 	};
 	return (
 		<>
-			<Input onChange={registerInput}></Input>
+			<Input
+				onChange={registerInput}
+				placeholderText='Enter course name of id...'
+			></Input>
 			<Button
 				buttonText='search'
 				onClick={() => searchItems(searchQuery)}

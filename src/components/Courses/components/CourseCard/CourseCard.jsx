@@ -23,8 +23,8 @@ export default function CourseCard({ course }) {
 	return (
 		<div className='card__container'>
 			<div className='card__left'>
-				<h3>{title}</h3>
-				<p>{description}</p>
+				<h2>{title}</h2>
+				<p className='course__description'>{description}</p>
 			</div>
 			<div className='card__right'>
 				<p className='card__authors'>

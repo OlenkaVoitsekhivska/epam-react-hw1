@@ -6,7 +6,6 @@ export default function Input({ labelText, placeholderText, onChange, value }) {
 			<label htmlFor='search-course'>{labelText}</label>
 			<input
 				id='search-course'
-				type='search'
 				value={value}
 				placeholder={placeholderText}
 				onChange={(e) => onChange(e.target.value)}

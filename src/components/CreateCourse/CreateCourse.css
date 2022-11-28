@@ -1,0 +1,38 @@
+textarea{
+    text-indent: 10px;
+    width: 100%;
+    border-style: solid;
+    border-color: rgb(219, 217, 69);
+}
+
+.grid-wrap{
+    margin-top: 20px;
+    display: grid;
+    grid-template-areas:
+    "create__author  create__authorsList"
+    "create__duration  create__courseAuthors";
+}
+.create__author input,.create__duration input{
+    width: 90%;
+}
+.create__author button{
+    margin: 20px auto 0;
+}
+.grid-wrap h2{
+    margin-bottom: 30px;
+}
+form{
+    padding:30px;
+    outline:1px solid rgb(8, 48, 226);
+}
+
+.create__title{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.create__courseAuthors li, .create__authorsList li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}

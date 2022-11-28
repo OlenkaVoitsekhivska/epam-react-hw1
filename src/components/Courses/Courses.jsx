@@ -26,7 +26,7 @@ export default function Courses({ toggleShowComponent }) {
 	};
 
 	return (
-		<>
+		<div className='courses'>
 			<div className='searchCourse__wrapper'>
 				<SearchBar searchItems={searchItems}></SearchBar>
 				<Button
@@ -38,6 +38,6 @@ export default function Courses({ toggleShowComponent }) {
 			{courseList().map((course) => (
 				<CourseCard course={course} key={course.id}></CourseCard>
 			))}
-		</>
+		</div>
 	);
 }
