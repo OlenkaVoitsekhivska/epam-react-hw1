@@ -8,6 +8,32 @@ import { v4 as uuidv4 } from 'uuid';
 import { mockedCoursesList as courses } from '../../constants';
 import './CreateCourse.css';
 
+const INPUT__TEXT = {
+	title: {
+		label: 'Title',
+		placeholder: 'Enter title...',
+	},
+	description: {
+		label: 'Description',
+		placeholder: 'Enter description...',
+	},
+	addAuthor: {
+		label: 'Author name',
+		placeholder: 'Enter author name...',
+	},
+	duration: {
+		label: 'Duration',
+		placeholder: 'Enter duration in minutes',
+	},
+};
+
+const BTN__TEXT = {
+	createCourse: 'Create course',
+	addAuthor: 'Add author',
+	deleteAuthor: 'Delete author',
+	createAuthor: 'Create author',
+};
+
 export default function CreateCourse({ toggleShowComponent }) {
 	const handleDelete = (deletedAuthor) => {
 		setSelectedAuthors((prevState) => {
@@ -36,7 +62,7 @@ export default function CreateCourse({ toggleShowComponent }) {
 			<li key={author.id}>
 				{author.name}
 				<Button
-					buttonText='Delete author'
+					buttonText={BTN__TEXT.deleteAuthor}
 					onClick={() => handleDelete(author)}
 				></Button>
 			</li>
@@ -81,20 +107,21 @@ export default function CreateCourse({ toggleShowComponent }) {
 		<form className='create__container' onSubmit={handleSubmit}>
 			<div className='create__title'>
 				<Input
-					labelText='Title'
-					placeholderText='Enter title...'
-					onChange={(e) => setTitle(e)}
+					labelText={INPUT__TEXT.title.label}
+					placeholderText={INPUT__TEXT.title.placeholder}
+					onChange={(e) => setTitle(e.target.value)}
 					value={title}
 					type='text'
+					minLength={2}
 					required
 				></Input>
 
-				<Button buttonText='Create course' type='submit'></Button>
+				<Button buttonText={BTN__TEXT.createCourse} type='submit'></Button>
 			</div>
-			<label htmlFor='courseDescription'>Description</label>
+			<label htmlFor='courseDescription'>{INPUT__TEXT.description.label}</label>
 			<textarea
-				name=''
-				placeholder='Enter description...'
+				name='description'
+				placeholder={INPUT__TEXT.description.placeholder}
 				id='courseDescription'
 				cols='30'
 				rows='10'
@@ -106,17 +133,16 @@ export default function CreateCourse({ toggleShowComponent }) {
 					<h2>Add author</h2>
 					<div>
 						<Input
-							required
 							minLength={2}
 							value={addAuthor}
-							labelText='Author name'
+							labelText={INPUT__TEXT.addAuthor.label}
 							type='text'
-							placeholderText='Enter author name...'
-							onChange={(e) => setAddAuthor(e)}
+							placeholderText={INPUT__TEXT.addAuthor.placeholder}
+							onChange={(e) => setAddAuthor(e.target.value)}
 						></Input>
 						{/* HERE WE ARE CREATING NEW AUTHOR */}
 						<Button
-							buttonText='Create author'
+							buttonText={BTN__TEXT.createAuthor}
 							type='button'
 							onClick={(e) => handleAddAuthor(e, addAuthor)}
 						></Button>
@@ -131,7 +157,7 @@ export default function CreateCourse({ toggleShowComponent }) {
 								{name}
 								{/* HERE WE ARE ADDING AUTHORS TO COURSE LIST */}
 								<Button
-									buttonText='Add author'
+									buttonText={BTN__TEXT.addAuthor}
 									type='button'
 									onClick={() => addAuthors({ id, name })}
 								></Button>
@@ -142,9 +168,9 @@ export default function CreateCourse({ toggleShowComponent }) {
 				<div className='create__duration'>
 					<h2>Duration</h2>
 					<Input
-						labelText='Duration'
-						placeholderText='Enter duration in minutes'
-						onChange={(e) => setDuration(e)}
+						labelText={INPUT__TEXT.duration.label}
+						placeholderText={INPUT__TEXT.duration.placeholder}
+						onChange={(e) => setDuration(e.target.value)}
 						value={duration}
 						type='number'
 						required

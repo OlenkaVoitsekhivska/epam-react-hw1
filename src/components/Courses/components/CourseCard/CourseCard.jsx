@@ -1,11 +1,13 @@
 import Button from '../../../../common/Button/Button';
-import SearchBar from '../SearchBar/SearchBar';
-import { listAuthorsString } from '../../../../helpers/pipeAuthor';
 import { pipeDuration } from '../../../../helpers/pipeDuration';
 import { dateGenerator } from '../../../../helpers/dateGeneratop';
 import React, { useContext } from 'react';
 import { Context } from '../../../../Context';
 import './CourseCard.css';
+
+const BTN__TEXT = {
+	showCourse: 'Show course',
+};
 
 export default function CourseCard({ course }) {
 	const [context, setContext] = useContext(Context);
@@ -39,7 +41,7 @@ export default function CourseCard({ course }) {
 					<b>Created: </b>
 					{dateGenerator(creationDate)}
 				</p>
-				<Button buttonText='Show course'></Button>
+				<Button buttonText={BTN__TEXT.showCourse} type='button'></Button>
 			</div>
 		</div>
 	);

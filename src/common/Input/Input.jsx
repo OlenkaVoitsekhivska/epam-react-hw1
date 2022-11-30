@@ -1,16 +1,14 @@
-import Button from '../Button/Button';
 import './Input.css';
-export default function Input({ labelText, placeholderText, onChange, value }) {
+export default function Input({
+	labelText,
+	placeholderText,
+	onChange,
+	...props
+}) {
 	return (
 		<div className='input__container'>
 			<label htmlFor='search-course'>{labelText}</label>
-			<input
-				id='search-course'
-				value={value}
-				placeholder={placeholderText}
-				onChange={(e) => onChange(e.target.value)}
-			/>
-			{/* <Button buttonText='search'></Button> */}
+			<input placeholder={placeholderText} onChange={onChange} {...props} />
 		</div>
 	);
 }

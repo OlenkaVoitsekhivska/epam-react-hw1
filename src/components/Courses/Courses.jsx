@@ -6,6 +6,10 @@ import { useContext, useState } from 'react';
 import { Context } from '../../Context';
 import './Courses.css';
 
+const BTN__TEXT = {
+	addNewCourse: 'Add new course',
+};
+
 export default function Courses({ toggleShowComponent }) {
 	const [courses, setCourses] = useState(list);
 	const [context, setContext] = useContext(Context);
@@ -30,7 +34,7 @@ export default function Courses({ toggleShowComponent }) {
 			<div className='searchCourse__wrapper'>
 				<SearchBar searchItems={searchItems}></SearchBar>
 				<Button
-					buttonText='Add new course'
+					buttonText={BTN__TEXT.addNewCourse}
 					type='button'
 					onClick={toggleShowComponent}
 				></Button>

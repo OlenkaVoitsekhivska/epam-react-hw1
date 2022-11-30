@@ -4,11 +4,22 @@ import React, { useState, useContext } from 'react';
 import { Context } from '../../../../Context';
 import './SearchBar.css';
 
+const INPUT__TEXT = {
+	search: {
+		placeholder: 'Enter course name of id...',
+	},
+};
+
+const BTN__TEXT = {
+	search: 'search',
+};
+
 export default function SearchBar({ searchItems }) {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [context, setContext] = useContext(Context);
 
-	const registerInput = (searchWord) => {
+	const registerInput = (e) => {
+		const searchWord = e.target.value;
 		setSearchQuery(searchWord);
 		if (!searchWord) {
 			setContext((prevState) => ({ ...prevState, filter: '' }));
@@ -18,11 +29,12 @@ export default function SearchBar({ searchItems }) {
 		<>
 			<Input
 				onChange={registerInput}
-				placeholderText='Enter course name of id...'
+				placeholderText={INPUT__TEXT.search.placeholder}
 			></Input>
 			<Button
-				buttonText='search'
+				buttonText={BTN__TEXT.search}
 				onClick={() => searchItems(searchQuery)}
+				type='button'
 			></Button>
 		</>
 	);
