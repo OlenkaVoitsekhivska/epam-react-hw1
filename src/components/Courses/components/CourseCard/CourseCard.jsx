@@ -3,7 +3,7 @@ import { pipeDuration } from '../../../../helpers/pipeDuration';
 import { dateGenerator } from '../../../../helpers/dateGeneratop';
 import React, { useContext } from 'react';
 import { Context } from '../../../../Context';
-import './CourseCard.css';
+import s from './CourseCard.module.css';
 
 const BTN__TEXT = {
 	showCourse: 'Show course',
@@ -23,13 +23,13 @@ export default function CourseCard({ course }) {
 	};
 
 	return (
-		<div className='card__container'>
-			<div className='card__left'>
+		<div className={s.card__container}>
+			<div className={s.card__left}>
 				<h2>{title}</h2>
-				<p className='course__description'>{description}</p>
+				<p className={s.course__description}>{description}</p>
 			</div>
-			<div className='card__right'>
-				<p className='card__authors'>
+			<div className={s.card__right}>
+				<p className={s.card__authors}>
 					<b>Authors: </b>
 					{listAuthorsString(authors)}
 				</p>

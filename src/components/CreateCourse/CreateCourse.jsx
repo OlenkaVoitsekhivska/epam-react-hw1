@@ -6,7 +6,7 @@ import { Context } from '../../Context';
 import { pipeDuration } from '../../helpers/pipeDuration';
 import { v4 as uuidv4 } from 'uuid';
 import { mockedCoursesList as courses } from '../../constants';
-import './CreateCourse.css';
+import s from './CreateCourse.module.css';
 
 const INPUT__TEXT = {
 	title: {
@@ -105,21 +105,23 @@ export default function CreateCourse({ toggleShowComponent }) {
 
 	return (
 		<form className='create__container' onSubmit={handleSubmit}>
-			<div className='create__title'>
-				<Input
-					labelText={INPUT__TEXT.title.label}
-					placeholderText={INPUT__TEXT.title.placeholder}
-					onChange={(e) => setTitle(e.target.value)}
-					value={title}
-					type='text'
-					minLength={2}
-					required
-				></Input>
-
+			<div className={s.create__title}>
+				<div className={s.create__input}>
+					<Input
+						labelText={INPUT__TEXT.title.label}
+						placeholderText={INPUT__TEXT.title.placeholder}
+						onChange={(e) => setTitle(e.target.value)}
+						value={title}
+						type='text'
+						minLength={2}
+						required
+					></Input>
+				</div>
 				<Button buttonText={BTN__TEXT.createCourse} type='submit'></Button>
 			</div>
 			<label htmlFor='courseDescription'>{INPUT__TEXT.description.label}</label>
 			<textarea
+				className={s.textarea}
 				name='description'
 				placeholder={INPUT__TEXT.description.placeholder}
 				id='courseDescription'
@@ -128,8 +130,8 @@ export default function CreateCourse({ toggleShowComponent }) {
 				onChange={(e) => setDescription(e.target.value)}
 				minLength={2}
 			></textarea>
-			<div className='grid-wrap'>
-				<div className='create__author'>
+			<div className={s['grid-wrap']}>
+				<div className={s.create__author}>
 					<h2>Add author</h2>
 					<div>
 						<Input
@@ -149,23 +151,25 @@ export default function CreateCourse({ toggleShowComponent }) {
 					</div>
 				</div>
 
-				<div className='create__authorsList'>
+				<div className={s.create__authorsList}>
 					<h2>Authors</h2>
 					<ul>
 						{availableAuthors.map(({ id, name }) => (
 							<li key={id}>
 								{name}
 								{/* HERE WE ARE ADDING AUTHORS TO COURSE LIST */}
-								<Button
-									buttonText={BTN__TEXT.addAuthor}
-									type='button'
-									onClick={() => addAuthors({ id, name })}
-								></Button>
+								<div className={s.btn__addAuthor}>
+									<Button
+										buttonText={BTN__TEXT.addAuthor}
+										type='button'
+										onClick={() => addAuthors({ id, name })}
+									></Button>
+								</div>
 							</li>
 						))}
 					</ul>
 				</div>
-				<div className='create__duration'>
+				<div className={s.create__duration}>
 					<h2>Duration</h2>
 					<Input
 						labelText={INPUT__TEXT.duration.label}
@@ -175,9 +179,9 @@ export default function CreateCourse({ toggleShowComponent }) {
 						type='number'
 						required
 					></Input>
-					<p>Duration:{pipeDuration(duration)} hours</p>
+					<p>Duration: {pipeDuration(duration)} hours</p>
 				</div>
-				<div className='create__courseAuthors'>
+				<div className={s.create__courseAuthors}>
 					<h2>Course authors</h2>
 
 					{selectedAuthors.length ? (

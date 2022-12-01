@@ -4,7 +4,7 @@ import Button from '../../common/Button/Button';
 import { mockedCoursesList as list } from '../../constants';
 import { useContext, useState } from 'react';
 import { Context } from '../../Context';
-import './Courses.css';
+import s from './Courses.module.css';
 
 const BTN__TEXT = {
 	addNewCourse: 'Add new course',
@@ -31,8 +31,10 @@ export default function Courses({ toggleShowComponent }) {
 
 	return (
 		<div className='courses'>
-			<div className='searchCourse__wrapper'>
-				<SearchBar searchItems={searchItems}></SearchBar>
+			<div className={s.searchCourse__wrapper}>
+				<div className={s.searchCourse__input}>
+					<SearchBar searchItems={searchItems}></SearchBar>
+				</div>
 				<Button
 					buttonText={BTN__TEXT.addNewCourse}
 					type='button'

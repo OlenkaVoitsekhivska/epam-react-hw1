@@ -1,4 +1,4 @@
-textarea{
+.textarea{
     text-indent: 10px;
     width: 100%;
     border-style: solid;
@@ -29,10 +29,27 @@ form{
 .create__title{
     display: flex;
     margin-bottom: 20px;
+    justify-content: space-between;
+    align-items:flex-end;
+}
+.create__title button{
+    margin:0;
 }
 
 .create__courseAuthors li, .create__authorsList li{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+}
+.create__courseAuthors button{
+    margin:0;
+}
+
+.btn__addAuthor{
+    margin:0;
+}
+
+.create__input{
+    width: 45%;
 }

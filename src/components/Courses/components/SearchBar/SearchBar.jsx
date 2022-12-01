@@ -33,7 +33,7 @@ export default function SearchBar({ searchItems }) {
 			></Input>
 			<Button
 				buttonText={BTN__TEXT.search}
-				onClick={() => searchItems(searchQuery)}
+				onClick={() => searchItems(searchQuery.trim())}
 				type='button'
 			></Button>
 		</>
